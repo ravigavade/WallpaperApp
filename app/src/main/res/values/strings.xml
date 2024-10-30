@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WallpaperApp</string>
+    <string name="desc">An immersive wallpaper app that fetches and sets high-quality, customizable wallpapers tailored to your screen preferences.</string>
+    <string name="search_by_colours">Search by colours</string>
+</resources>
