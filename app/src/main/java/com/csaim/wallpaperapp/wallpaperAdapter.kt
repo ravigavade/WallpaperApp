@@ -1,5 +1,6 @@
 package com.csaim.wallpaperapp
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class wallpaperAdapter(val wallpapers:List<WallpaperData>):RecyclerView.Adapter<wallpaperAdapter.ViewHolder>() {
+class wallpaperAdapter(
+    private val context: Context,
+    val wallpapers:List<WallpaperData>,
+    private val onWallpaperClick: (String) -> Unit // callback for wallpaper click
+    ):RecyclerView.Adapter<wallpaperAdapter.ViewHolder>() {
+
     class ViewHolder(rootLayout: View): RecyclerView.ViewHolder(rootLayout){
         val icon: ImageView =rootLayout.findViewById(R.id.icon)
 //        val category:TextView=rootLayout.findViewById(R.id.category)
@@ -40,9 +46,9 @@ class wallpaperAdapter(val wallpapers:List<WallpaperData>):RecyclerView.Adapter<
                 .into(holder.icon)
         }
 
-//        holder.icon.setOnClickListener {
-//            onWallpaperClick(currentWallpapers.path)
-//        }
+        holder.icon.setOnClickListener {
+            onWallpaperClick(currentWallpapers.path)
+        }
 
     }
 }
