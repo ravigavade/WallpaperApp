@@ -31,7 +31,8 @@ class wList : AppCompatActivity() {
 
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                 wallpapers = wallpaperManager.retrieveCarsWallpaper(q)
+                 wallpapers = wallpaperManager.retrieveCarsWallpaper(q,apiKey)
+                Log.d("fucal","calling")
             }
 
             binding.recyclerView.layoutManager = LinearLayoutManager(this@wList)
