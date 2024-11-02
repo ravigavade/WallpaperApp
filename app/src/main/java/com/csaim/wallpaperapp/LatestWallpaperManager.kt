@@ -9,7 +9,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 
-class WallpaperManager {
+class LatestWallpaperManager {
     private val okHttpClient: OkHttpClient
 
     init {
@@ -20,10 +20,10 @@ class WallpaperManager {
         okHttpClient = builder.build()
     }
 
-    suspend fun retrieveCarsWallpaper(q: String,apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
+    suspend fun retrieveLatestsWallpaper(apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
 //            .url("https://wallhaven.cc/api/v1/search?q=$q&resolutions=1920x1200&categories=111*")
-            .url("https://pixabay.com/api/?q=$q&image_type=photo&category=computer&min_width=1080&min_height=1920&orientation=vertical&key=$apikey")
+            .url("https://pixabay.com/api/?key=$apikey&orientation=vertical&order=latest&per_page=200")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()
