@@ -8,6 +8,7 @@ import android.app.WallpaperManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.csaim.wallpaperapp.databinding.ActivityWlistBinding
 import com.squareup.picasso.Picasso
@@ -35,7 +36,7 @@ class wList : AppCompatActivity() {
                 Log.d("fucal","calling")
             }
 
-            binding.recyclerView.layoutManager = LinearLayoutManager(this@wList)
+            binding.recyclerView.layoutManager = GridLayoutManager(this@wList,2)
             binding.recyclerView.adapter = wallpaperAdapter(this@wList, wallpapers) { imageUrl ->
                 setWallpaper(imageUrl)
             }

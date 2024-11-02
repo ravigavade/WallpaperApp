@@ -7,14 +7,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     tools:context=".wList">
 
     <androidx.recyclerview.widget.RecyclerView
         android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:background="@color/bg"
         android:layout_height="match_parent"
-        android:padding="8dp"
+        android:layout_marginHorizontal="@dimen/_9sdp"
         android:id="@+id/recyclerView"/>
 
 

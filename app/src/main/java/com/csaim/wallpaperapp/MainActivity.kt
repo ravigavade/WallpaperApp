@@ -32,10 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.findBtn.setOnClickListener{
-            val search=binding.keyword.getText().toString().trim()
-            startActivity(Intent(this,wList::class.java).putExtra("Extra",search))
-        }
+//        binding.findBtn.setOnClickListener{
+//            val search=binding.keyword.getText().toString().trim()
+//            startActivity(Intent(this,wList::class.java).putExtra("Extra",search))
+//        }
 
     }
 }
