@@ -288,7 +288,25 @@
 
 
 <!--    </LinearLayout>-->
+    <LinearLayout
+        android:paddingTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/_5sdp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Epic Frames"
+            android:layout_weight="1"
+            android:textSize="@dimen/_20ssp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            />
+    </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"

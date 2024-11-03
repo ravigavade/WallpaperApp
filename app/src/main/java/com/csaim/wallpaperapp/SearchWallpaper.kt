@@ -54,7 +54,7 @@ class SearchWallpaper : AppCompatActivity() {
                     Log.d("fucal","calling")
                 }
 
-                binding.recyclerView.layoutManager = GridLayoutManager(this@SearchWallpaper,2)
+                binding.recyclerView.layoutManager = GridLayoutManager(this@SearchWallpaper,3)
                 binding.recyclerView.adapter = wallpaperAdapter(this@SearchWallpaper, wallpapers) { imageUrl ->
                     setWallpaper(imageUrl)
                 }

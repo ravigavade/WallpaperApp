@@ -16,6 +16,9 @@
         android:theme="@style/Theme.WallpaperApp"
         tools:targetApi="31">
         <activity
+            android:name=".PreviewScreen"
+            android:exported="false" />
+        <activity
             android:name=".AccountFragment"
             android:exported="false" />
         <activity

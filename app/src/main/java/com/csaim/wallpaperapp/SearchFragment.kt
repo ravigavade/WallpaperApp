@@ -45,7 +45,7 @@ class SearchFragment : Fragment() {
                 wallpapers = wallpaperManager.retrieveCarsWallpaper(q, apiKey)
                 Log.d("fucal", "calling")
             }
-            binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+            binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
             binding.recyclerView.adapter = wallpaperAdapter(requireContext(), wallpapers) { imageUrl ->
                 setWallpaper(imageUrl)
             }
@@ -63,7 +63,7 @@ class SearchFragment : Fragment() {
                     Log.d("fucal","calling")
                 }
 
-                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+                binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
                 binding.recyclerView.adapter = wallpaperAdapter(requireContext(), wallpapers) { imageUrl ->
                     setWallpaper(imageUrl)
                 }

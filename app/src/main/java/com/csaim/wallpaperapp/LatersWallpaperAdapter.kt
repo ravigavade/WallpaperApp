@@ -47,7 +47,8 @@ class LatersWallpaperAdapter(
         }
 
         holder.icon.setOnClickListener {
-            onWallpaperClick(currentWallpapers.path)
+            //sets the pic as wallpapaer
+//            onWallpaperClick(currentWallpapers.path)
         }
 
     }

@@ -36,7 +36,7 @@ class wList : AppCompatActivity() {
                 Log.d("fucal","calling")
             }
 
-            binding.recyclerView.layoutManager = GridLayoutManager(this@wList,2)
+            binding.recyclerView.layoutManager = GridLayoutManager(this@wList,3)
             binding.recyclerView.adapter = wallpaperAdapter(this@wList, wallpapers) { imageUrl ->
                 setWallpaper(imageUrl)
             }
