@@ -5,18 +5,19 @@
     <item
         android:id="@+id/nav_main"
         android:icon="@drawable/home"
+        
         android:fontFamily="@font/poppins"
-
-        android:title="Main" />
+        android:title="" />
     <item
         android:id="@+id/nav_search"
         android:fontFamily="@font/poppins"
 
         android:icon="@drawable/search"
-        android:title="Search" />
+        android:title="" />
     <item
         android:id="@+id/nav_account"
         android:icon="@drawable/baseline_account_circle_24"
         android:fontFamily="@font/poppins"
-        android:title="Account" />
+        android:title=""
+        />
 </menu>

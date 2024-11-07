@@ -1,6 +1,7 @@
 package com.csaim.wallpaperapp
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,14 +41,17 @@ class wallpaperAdapter(
 //        er
 
         if(currentWallpapers.path.isNotEmpty()){
-            Picasso.get().setIndicatorsEnabled(true)
+//            Picasso.get().setIndicatorsEnabled(true)
             Picasso.get()
                 .load(currentWallpapers.path)
                 .into(holder.icon)
         }
 
         holder.icon.setOnClickListener {
-            onWallpaperClick(currentWallpapers.path)
+            val intent = Intent(context, PreviewScreen::class.java).apply {
+                putExtra("WALLPAPER_URL", currentWallpapers.path) // Pass the wallpaper URL to PreviewScreen
+            }
+            context.startActivity(intent)
         }
 
     }

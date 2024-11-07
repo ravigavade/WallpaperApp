@@ -52,8 +52,6 @@ class SearchFragment : Fragment() {
         }
 
         binding.findBtn.setOnClickListener{
-            val search=binding.keyword.getText().toString().trim()
-
 
             q=binding.keyword.getText().toString().trim()
 

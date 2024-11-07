@@ -9,22 +9,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
-
-
-    <!--    <Button-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="list"-->
-    <!--        android:layout_marginHorizontal="20dp"-->
-    <!--        android:id="@+id/btn"/>-->
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
         android:orientation="vertical"
         android:padding="@dimen/_8sdp">
 
@@ -35,12 +22,20 @@
             android:text="@string/search_by_colours"
             android:textColor="@color/white" />
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:backgroundTint="@color/bg"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_8sdp">
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:scrollbars="none"
+
             android:layout_height="wrap_content">
 
-            <!-- Use a LinearLayout with horizontal orientation to contain the CardViews -->
+
+
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +53,7 @@
                     android:id="@+id/lilac"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#C8A2C8"
                     app:cardCornerRadius="8dp" />
 
@@ -66,7 +61,7 @@
                     android:id="@+id/yellow"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#ffcc33"
                     app:cardCornerRadius="8dp" />
 
@@ -74,14 +69,14 @@
                     android:id="@+id/brown"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#663300"
                     app:cardCornerRadius="8dp" />
                 <androidx.cardview.widget.CardView
                     android:id="@+id/blue"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#0066cc"
                     app:cardCornerRadius="8dp" />
 
@@ -90,7 +85,7 @@
                     android:id="@+id/green"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#336600"
                     app:cardCornerRadius="8dp" />
 
@@ -98,7 +93,7 @@
                     android:id="@+id/red"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#cc3333"
                     app:cardCornerRadius="8dp" />
 
@@ -106,7 +101,7 @@
                     android:id="@+id/turquoise"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#40E0D0"
                     app:cardCornerRadius="8dp" />
 
@@ -122,88 +117,17 @@
                     android:id="@+id/transparent"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginStart="4dp"
                     android:backgroundTint="#00000000"
                     app:cardCornerRadius="8dp" />
 
-
-
-
             </LinearLayout>
         </HorizontalScrollView>
-    </LinearLayout>
-
-
-
-
-
-    <LinearLayout
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <!--cars banner card-->
-
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:id="@+id/carsBanner"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="10dp"-->
-        <!--            app:cardCornerRadius="8dp">-->
-        <!--            <FrameLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent">-->
-
-        <!--                <ImageView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="@dimen/_120sdp"-->
-        <!--                    android:scaleType="centerCrop"-->
-        <!--                    android:src="@drawable/carb2" />-->
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="CARS"-->
-        <!--                    android:fontFamily="@font/poppins"-->
-        <!--                    android:textColor="@color/white"-->
-        <!--                    android:layout_margin="10dp"-->
-        <!--                    android:textSize="20sp"/>-->
-        <!--            </FrameLayout>-->
-
-
-        <!--        </androidx.cardview.widget.CardView>-->
-
-        <!--        anime cards banner-->
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:id="@+id/animeBanner"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:cardCornerRadius="8dp">-->
-
-        <!--            <FrameLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent">-->
-
-        <!--                <ImageView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="@dimen/_120sdp"-->
-        <!--                    android:layout_marginTop="0dp"-->
-        <!--                    android:scaleType="centerCrop"-->
-        <!--                    android:src="@drawable/banneranime" />-->
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="ANIME"-->
-        <!--                    android:fontFamily="@font/poppins"-->
-        <!--                    android:textColor="@color/white"-->
-        <!--                    android:layout_margin="10dp"-->
-        <!--                    android:textSize="20sp"/>-->
-        <!--            </FrameLayout>-->
-        <!--        </androidx.cardview.widget.CardView>-->
+    </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
+
 
 
     <!--    latest wallpapers-->
@@ -231,7 +155,7 @@
             android:id="@+id/LatestWallpaperRecyclerView"
             android:layout_marginBottom="@dimen/_3sdp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_120sdp"/>
+            android:layout_height="@dimen/_180sdp"/>
 
 
     </LinearLayout>
@@ -261,32 +185,9 @@
             android:id="@+id/IllustrationRecyclerView"
             android:layout_marginBottom="@dimen/_3sdp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_120sdp"/>
+            android:layout_height="@dimen/_180sdp"/>
 
 
     </LinearLayout>
-
-<!--    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical">-->
-
-<!--        <FrameLayout-->
-<!--            android:id="@+id/fragment_container"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="1" />-->
-
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:id="@+id/bottom_navigation"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/_50sdp"-->
-<!--            android:background="?android:attr/windowBackground"-->
-<!--            app:menu="@menu/bottom_navigation_menu" />-->
-
-<!--    </LinearLayout>-->
-
-
 
 </LinearLayout>

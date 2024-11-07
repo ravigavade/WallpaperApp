@@ -53,9 +53,11 @@ class WallpaperManager {
 //                        views = views,
                         path = path,
                     )
+
                     wallpaperList.add(walp)
                 }
             }
+            wallpaperList.shuffle()
             wallpaperList
         } else {
             emptyList()

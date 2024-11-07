@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView
     app:cardCornerRadius="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_100sdp"
-    android:layout_height="@dimen/_180sdp"
-    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:backgroundTint="@color/white"
+    android:layout_marginHorizontal="1dp"
+    android:layout_marginBottom="@dimen/_2sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -17,8 +18,8 @@
             android:id="@+id/icon"
             android:src="@color/red"
             android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_170sdp"/>
 
     </LinearLayout>
 

@@ -23,7 +23,7 @@ class LatestWallpaperManager {
     suspend fun retrieveLatestsWallpaper(apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
 //            .url("https://wallhaven.cc/api/v1/search?q=$q&resolutions=1920x1200&categories=111*")
-            .url("https://pixabay.com/api/?key=$apikey&orientation=vertical&order=latest&per_page=200")
+            .url("https://pixabay.com/api/?key=$apikey&orientation=vertical&image_type=illustratio&norder=latest&per_page=200")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()
@@ -56,6 +56,7 @@ class LatestWallpaperManager {
                     wallpaperList.add(walp)
                 }
             }
+            wallpaperList.shuffle()
             wallpaperList
         } else {
             emptyList()

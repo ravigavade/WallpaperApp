@@ -19,8 +19,8 @@
             android:id="@+id/icon"
             android:src="@color/red"
             android:scaleType="centerCrop"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_130sdp"/>
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_170sdp"/>
 
 
     </LinearLayout>
