@@ -84,32 +84,38 @@ class MainFragment : Fragment() {
             startActivity(Intent(requireContext(),wList::class.java).putExtra("Extra",color))
         }
 
-        //layout for popular wallpaper horizontal view
+        //layout for popular latest horizontal view
         lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                wallpapers = wallpaperManagerLatest.retrieveLatestsWallpaper(apiKey)
-                Log.d("fucal","calling")
+            val wallpapersLatest: List<WallpaperData> = withContext(Dispatchers.IO) {
+                wallpaperManagerLatest.retrieveLatestsWallpaper(apiKey)
             }
 
-            binding.LatestWallpaperRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-            binding.LatestWallpaperRecyclerView.adapter = LatersWallpaperAdapter(requireContext(), wallpapers) { imageUrl ->
+            binding.LatestWallpaperRecyclerView.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            binding.LatestWallpaperRecyclerView.adapter = LatersWallpaperAdapter(requireContext(), wallpapersLatest) { imageUrl ->
                 setWallpaper(imageUrl)
             }
-
         }
-        //layout for Illustration wallpaper horizontal view
+
+//layout for vectors wallpaper horizontal view
         lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                wallpapers = wallpaperManagerIllustraion.retrieveIllustrationWallpaper(apiKey)
-                Log.d("fucal","calling")
+            val wallpapersIllustration: List<WallpaperData> = withContext(Dispatchers.IO) {
+                wallpaperManagerIllustraion.retrieveIllustrationWallpaper(apiKey)
             }
 
-            binding.IllustrationRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-            binding.IllustrationRecyclerView.adapter = LatersWallpaperAdapter(requireContext(), wallpapers) { imageUrl ->
+            binding.IllustrationRecyclerView.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            binding.IllustrationRecyclerView.adapter = LatersWallpaperAdapter(requireContext(), wallpapersIllustration) { imageUrl ->
                 setWallpaper(imageUrl)
             }
-
         }
+
 
 
 

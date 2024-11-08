@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout android:orientation="vertical"
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -10,7 +9,8 @@
     android:padding="@dimen/_4sdp"
     android:background="@color/bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".wList">
+    tools:context=".FavFragment"
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -18,11 +18,11 @@
         android:layout_height="match_parent"
         app:cardCornerRadius="8dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyclerView"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="@color/bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/favRecyclerView"/>
 
     </androidx.cardview.widget.CardView>
 

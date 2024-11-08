@@ -4,6 +4,7 @@ import android.app.WallpaperManager
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set the status bar color to black
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
+        }
+
+        // Optional: Change the status bar icons to be light (white) for better visibility on dark background
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setBackgroundColor(ContextCompat.getColor(this, R.color.bg))
@@ -46,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             val selectedFragment = when (item.itemId) {
                 R.id.nav_main -> MainFragment()
                 R.id.nav_search -> SearchFragment()
-//                R.id.nav_account -> AccountFragment()
+                R.id.nav_account -> FavFragment()
                 else -> null
             }
             selectedFragment?.let {
@@ -59,30 +68,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    //function that sets the image as wallpaper
-//    private fun setWallpaper(imageUrl: String) {
-//        val target = object : com.squareup.picasso.Target {
-//            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
-//                try {
-//                    val wallpaperManager = WallpaperManager.getInstance(this@MainActivity)
-//                    wallpaperManager.setBitmap(bitmap)
-//                    Toast.makeText(this@MainActivity, "Wallpaper Set Successfully", Toast.LENGTH_SHORT).show()
-//                } catch (e: Exception) {
-//                    e.printStackTrace()
-//                    Toast.makeText(this@MainActivity, "Failed to set wallpaper", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-//                Toast.makeText(this@MainActivity, "Failed to load image", Toast.LENGTH_SHORT).show()
-//            }
-//
-//            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-//                // Optional: you can display a loading placeholder here if needed
-//            }
-//        }
-//
-//        // Load the image with Picasso and pass the target
-//        Picasso.get().load(imageUrl).into(target)
-//    }
 }

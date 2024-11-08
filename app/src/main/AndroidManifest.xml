@@ -22,9 +22,6 @@
             android:name=".PreviewScreen"
             android:exported="false" />
         <activity
-            android:name=".AccountFragment"
-            android:exported="false" />
-        <activity
             android:name=".SearchFragment"
             android:exported="false" />
         <activity

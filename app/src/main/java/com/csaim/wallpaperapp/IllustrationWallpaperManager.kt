@@ -56,6 +56,7 @@ class IllustrationWallpaperManager {
                     wallpaperList.add(walp)
                 }
             }
+            wallpaperList.shuffle()
             wallpaperList
         } else {
             emptyList()

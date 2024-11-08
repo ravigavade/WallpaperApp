@@ -30,7 +30,7 @@
                         android:fontFamily="@font/poppins"
                         android:hint="@string/search"
                         android:padding="@dimen/_8sdp"
-                        android:textColor="@color/red" />
+                        android:textColor="@color/white" />
 
                     <ImageView
                         android:id="@+id/findBtn"

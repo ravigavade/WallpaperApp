@@ -35,6 +35,7 @@ android {
     }
     buildFeatures{
         viewBinding=true
+        dataBinding=true
     }
 }
 
@@ -64,5 +65,10 @@ dependencies {
 
     implementation ("com.intuit.sdp:sdp-android:1.1.1")
     implementation ("com.intuit.ssp:ssp-android:1.1.1")
+
+
+        implementation ("androidx.fragment:fragment-ktx:1.5.5")  // or latest version
+        implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")  // or latest version
+
 
 }

@@ -1,24 +1,41 @@
 package com.csaim.wallpaperapp
 
+import android.app.DownloadManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import android.app.WallpaperManager
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.csaim.wallpaperapp.databinding.ActivityPreviewScreenBinding
 import com.squareup.picasso.Picasso
 
 class PreviewScreen : AppCompatActivity() {
 
     private lateinit var binding:ActivityPreviewScreenBinding
+    private val favoriteWallpapers = mutableListOf<WallpaperData>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityPreviewScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        var isFavorite = false
+
+//        binding.favBtn.setOnClickListener {
+//            isFavorite = !isFavorite
+//            if (isFavorite) {
+//                binding.starimg.setImageResource(R.drawable.filledstar)
+//
+//            } else {
+//                binding.starimg.setImageResource(R.drawable.star)
+//            }
+//        }
+
 
         val link=intent.getStringExtra("WALLPAPER_URL")
 
@@ -31,6 +48,16 @@ class PreviewScreen : AppCompatActivity() {
         binding.setWallpaperBtn.setOnClickListener{
             if (link != null) {
                 setWallpaper(link)
+            }
+        }
+
+        binding.downloadBtn.setOnClickListener {
+            link?.let { imageUrl ->
+                val fileName = "wallpaper_${System.currentTimeMillis()}" // Generate a unique file name
+                downloadImage(this, imageUrl, fileName) // Call the download function
+                Toast.makeText(this, "Downloaded Successful ", Toast.LENGTH_SHORT).show()
+            } ?: run {
+                Toast.makeText(this, "Failed to get wallpaper URL", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -72,4 +99,16 @@ class PreviewScreen : AppCompatActivity() {
         // Load the image with Picasso and pass the target
         Picasso.get().load(imageUrl).into(target)
     }
+
+    fun downloadImage(context: Context, imageUrl: String, fileName: String) {
+        val request = DownloadManager.Request(Uri.parse(imageUrl))
+            .setTitle(fileName)
+            .setDescription("Downloading wallpaper...")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, "$fileName.jpg")
+        val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        downloadManager.enqueue(request)
+    }
+
+
 }

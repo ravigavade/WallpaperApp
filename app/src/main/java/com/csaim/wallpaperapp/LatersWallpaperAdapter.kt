@@ -20,9 +20,6 @@ class LatersWallpaperAdapter(
 
     class ViewHolder(rootLayout: View): RecyclerView.ViewHolder(rootLayout){
         val icon: ImageView =rootLayout.findViewById(R.id.icon)
-//        val category:TextView=rootLayout.findViewById(R.id.category)
-//        val views:TextView=rootLayout.findViewById(R.id.views)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,8 +36,6 @@ class LatersWallpaperAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentWallpapers=wallpapers[position]
-
-//        er
 
         if(currentWallpapers.path.isNotEmpty()){
 //            Picasso.get().setIndicatorsEnabled(true)
