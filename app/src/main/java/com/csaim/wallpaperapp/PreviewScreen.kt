@@ -11,6 +11,8 @@ import android.net.Uri
 import android.os.Environment
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.csaim.wallpaperapp.databinding.ActivityPreviewScreenBinding
 import com.squareup.picasso.Picasso
 
@@ -24,17 +26,11 @@ class PreviewScreen : AppCompatActivity() {
         binding= ActivityPreviewScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var isFavorite = false
+        // Set the status bar color to black
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
 
-//        binding.favBtn.setOnClickListener {
-//            isFavorite = !isFavorite
-//            if (isFavorite) {
-//                binding.starimg.setImageResource(R.drawable.filledstar)
-//
-//            } else {
-//                binding.starimg.setImageResource(R.drawable.star)
-//            }
-//        }
+        // Optional: Change the status bar icons to be light (white) for better visibility on dark background
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
 
         val link=intent.getStringExtra("WALLPAPER_URL")

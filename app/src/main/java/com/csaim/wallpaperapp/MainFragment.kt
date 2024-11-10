@@ -1,9 +1,11 @@
 package com.csaim.wallpaperapp
 
 import android.app.WallpaperManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -100,20 +102,41 @@ class MainFragment : Fragment() {
             }
         }
 
-//layout for vectors wallpaper horizontal view
-        lifecycleScope.launch {
-            val wallpapersIllustration: List<WallpaperData> = withContext(Dispatchers.IO) {
-                wallpaperManagerIllustraion.retrieveIllustrationWallpaper(apiKey)
-            }
 
-            binding.IllustrationRecyclerView.layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-            binding.IllustrationRecyclerView.adapter = LatersWallpaperAdapter(requireContext(), wallpapersIllustration) { imageUrl ->
-                setWallpaper(imageUrl)
+        //wlist intent for the illustration
+        binding.allIllustration.setOnClickListener {
+            val q = "illustration"
+            val intent = Intent(requireContext(), wList::class.java)
+            intent.putExtra("Extra", q)  // Pass data to the next activity
+            startActivity(intent)
+        }
+        binding.allPhotos.setOnClickListener {
+            val q = "photo"
+            val intent = Intent(requireContext(), wList::class.java)
+            intent.putExtra("Extra", q)  // Pass data to the next activity
+            startActivity(intent)
+        }
+
+//layout for illustration wallpaper horizontal view
+        //checking if internet is available hahahhaha bc
+        if(isInternetAvailable()) {
+            lifecycleScope.launch {
+                val wallpapersIllustration: List<WallpaperData> = withContext(Dispatchers.IO) {
+                    wallpaperManagerIllustraion.retrieveIllustrationWallpaper(apiKey)
+                }
+
+                binding.IllustrationRecyclerView.layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                binding.IllustrationRecyclerView.adapter =
+                    LatersWallpaperAdapter(requireContext(), wallpapersIllustration) { imageUrl ->
+                        setWallpaper(imageUrl)
+                    }
             }
+        }else{
+            Toast.makeText(requireContext(), "No internet connection", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -151,4 +174,12 @@ class MainFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+    fun isInternetAvailable(): Boolean {
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnected
+    }
+
 }

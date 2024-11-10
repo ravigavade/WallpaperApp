@@ -23,7 +23,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Epic Frames"
+            android:text="SmoothWallpapers "
             android:layout_weight="1"
             android:textSize="@dimen/_29ssp"
             android:textColor="@color/white"

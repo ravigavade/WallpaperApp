@@ -5,8 +5,13 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Toast
 import android.app.WallpaperManager
+import android.content.Context
+import android.net.ConnectivityManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,23 +31,39 @@ class wList : AppCompatActivity() {
         val wallpaperManager = WallpaperManager()
         var wallpapers = listOf<WallpaperData>()
 
-        val q = intent.getStringExtra("Extra").toString()
+        val q = intent.getStringExtra("Extra") ?: "Default Value"
         val apiKey=getString(com.csaim.wallpaperapp.R.string.apiKey)
         Log.d("q value","value $q")
 
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                 wallpapers = wallpaperManager.retrieveCarsWallpaper(q,apiKey)
-                Log.d("fucal","calling")
-            }
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
 
-            binding.recyclerView.layoutManager = GridLayoutManager(this@wList,3)
-            binding.recyclerView.adapter = wallpaperAdapter(this@wList, wallpapers) { imageUrl ->
-                setWallpaper(imageUrl)
-            }
+        // Optional: Change the status bar icons to be light (white) for better visibility on dark background
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
+        if (isInternetAvailable()) {
+            lifecycleScope.launch {
+                // Fetch wallpapers based on the value of q
+                withContext(Dispatchers.IO) {
+                    if (q == "illustration" || q == "photo") {
+                        // Fetch wallpapers for the category (illustration/photo)
+                        wallpapers = wallpaperManager.retrieveCategoryWallpaper(q, apiKey)
+                    } else {
+                        // Fetch wallpapers based on color or other categories (using the value from q)
+                        wallpapers = wallpaperManager.retrieveCarsWallpaper(q, apiKey)
+                    }
+                    Log.d("Wallpaper", "Fetched ${wallpapers.size} wallpapers")
+                }
+
+                // Set up RecyclerView with GridLayoutManager and adapter
+                binding.recyclerView.layoutManager = GridLayoutManager(this@wList, 3)
+                binding.recyclerView.adapter =
+                    wallpaperAdapter(this@wList, wallpapers) { imageUrl ->
+                        setWallpaper(imageUrl)
+                    }
+            }
+        }else{
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     //function that sets the image as wallpaper
@@ -71,5 +92,13 @@ class wList : AppCompatActivity() {
         // Load the image with Picasso and pass the target
         Picasso.get().load(imageUrl).into(target)
     }
+
+    fun isInternetAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnected
+    }
+
+
 
 }
