@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
 
         //here we go
 
-        val wallpaperManagerLatest = LatestWallpaperManager()
+        val wallpaperManagerLatest = PhotosWallpaperManager()
         val wallpaperManagerIllustraion = IllustrationWallpaperManager()
         var wallpapers = listOf<WallpaperData>()
 
@@ -89,7 +89,7 @@ class MainFragment : Fragment() {
         //layout for popular latest horizontal view
         lifecycleScope.launch {
             val wallpapersLatest: List<WallpaperData> = withContext(Dispatchers.IO) {
-                wallpaperManagerLatest.retrieveLatestsWallpaper(apiKey)
+                wallpaperManagerLatest.retrievePhotoWallpaper(apiKey)
             }
 
             binding.LatestWallpaperRecyclerView.layoutManager = LinearLayoutManager(
@@ -97,7 +97,7 @@ class MainFragment : Fragment() {
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
-            binding.LatestWallpaperRecyclerView.adapter = LatersWallpaperAdapter(requireContext(), wallpapersLatest) { imageUrl ->
+            binding.LatestWallpaperRecyclerView.adapter = PhotosWallpaperAdapter(requireContext(), wallpapersLatest) { imageUrl ->
                 setWallpaper(imageUrl)
             }
         }
@@ -131,7 +131,7 @@ class MainFragment : Fragment() {
                     false
                 )
                 binding.IllustrationRecyclerView.adapter =
-                    LatersWallpaperAdapter(requireContext(), wallpapersIllustration) { imageUrl ->
+                    PhotosWallpaperAdapter(requireContext(), wallpapersIllustration) { imageUrl ->
                         setWallpaper(imageUrl)
                     }
             }

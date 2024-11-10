@@ -27,7 +27,7 @@ class WallpaperManager {
     suspend fun retrieveCarsWallpaper(q: String,apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
 //            .url("https://wallhaven.cc/api/v1/search?q=$q&resolutions=1920x1200&categories=111*")
-            .url("https://pixabay.com/api/?q=$q&orientation=vertical&key=$apikey&per_page=200")
+            .url("https://pixabay.com/api/?q=$q&orientation=vertical&key=$apikey&per_page=200&safesearch=true")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()

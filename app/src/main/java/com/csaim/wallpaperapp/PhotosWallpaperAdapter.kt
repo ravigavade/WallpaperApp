@@ -2,21 +2,18 @@ package com.csaim.wallpaperapp
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class LatersWallpaperAdapter(
+class PhotosWallpaperAdapter(
     private val context: Context,
     val wallpapers:List<WallpaperData>,
     private val onWallpaperClick: (String) -> Unit // callback for wallpaper click
-    ):RecyclerView.Adapter<LatersWallpaperAdapter.ViewHolder>() {
+    ):RecyclerView.Adapter<PhotosWallpaperAdapter.ViewHolder>() {
 
     class ViewHolder(rootLayout: View): RecyclerView.ViewHolder(rootLayout){
         val icon: ImageView =rootLayout.findViewById(R.id.icon)
