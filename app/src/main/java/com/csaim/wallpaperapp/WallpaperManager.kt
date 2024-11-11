@@ -27,7 +27,7 @@ class WallpaperManager {
     suspend fun retrieveCarsWallpaper(q: String,apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
 //            .url("https://wallhaven.cc/api/v1/search?q=$q&resolutions=1920x1200&categories=111*")
-            .url("https://pixabay.com/api/?q=$q&orientation=vertical&key=$apikey&per_page=200&safesearch=true")
+            .url("https://pixabay.com/api/?q=$q&orientation=vertical&key=$apikey&per_page=200&safesearch=true&image_type=photo,illustration")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()
@@ -116,7 +116,7 @@ class WallpaperManager {
     suspend fun retrieveLimitedWallpaper(apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
 //            .url("https://wallhaven.cc/api/v1/search?q=$q&resolutions=1920x1200&categories=111*")
-            .url("https://pixabay.com/api/?orientation=vertical&key=$apikey&safesearch=true")
+            .url("https://pixabay.com/api/?orientation=vertical&key=$apikey&safesearch=true&image_type=photo,illustration")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()
@@ -160,7 +160,7 @@ class WallpaperManager {
 
     suspend fun retrieveAllWallpaper(apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
-            .url("https://pixabay.com/api/?orientation=vertical&key=$apikey&safesearch=true&per_page=200")
+            .url("https://pixabay.com/api/?orientation=vertical&key=$apikey&safesearch=true&per_page=200&image_type=photo,illustration")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()
