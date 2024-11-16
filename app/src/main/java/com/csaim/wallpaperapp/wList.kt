@@ -36,8 +36,6 @@ class wList : AppCompatActivity() {
         Log.d("q value","value $q")
 
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
-
-        // Optional: Change the status bar icons to be light (white) for better visibility on dark background
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         if (isInternetAvailable()) {
@@ -89,7 +87,7 @@ class wList : AppCompatActivity() {
             }
         }
 
-        // Load the image with Picasso and pass the target
+        // load the image with Picasso and pass the target
         Picasso.get().load(imageUrl).into(target)
     }
 

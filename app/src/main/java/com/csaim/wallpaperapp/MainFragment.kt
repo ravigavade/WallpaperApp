@@ -38,8 +38,8 @@ class MainFragment : Fragment() {
 
         //here we go
 
-        val wallpaperManagerLatest = PhotosWallpaperManager()
-        val wallpaperManagerIllustraion = IllustrationWallpaperManager()
+        val wallpaperManagerLatest=PhotosWallpaperManager()
+        val wallpaperManagerIllustraion=IllustrationWallpaperManager()
         var wallpapers = listOf<WallpaperData>()
 
         val apiKey=getString(com.csaim.wallpaperapp.R.string.apiKey)
@@ -105,15 +105,15 @@ class MainFragment : Fragment() {
 
         //wlist intent for the illustration
         binding.allIllustration.setOnClickListener {
-            val q = "illustration"
-            val intent = Intent(requireContext(), wList::class.java)
-            intent.putExtra("Extra", q)  // Pass data to the next activity
+            val q="illustration"
+            val intent=Intent(requireContext(), wList::class.java)
+            intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
         }
         binding.allPhotos.setOnClickListener {
-            val q = "photo"
-            val intent = Intent(requireContext(), wList::class.java)
-            intent.putExtra("Extra", q)  // Pass data to the next activity
+            val q="photo"
+            val intent=Intent(requireContext(), wList::class.java)
+            intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
         }
 
@@ -145,10 +145,10 @@ class MainFragment : Fragment() {
     }
 
     private fun setWallpaper(imageUrl: String) {
-        val target = object : com.squareup.picasso.Target {
+        val target=object : com.squareup.picasso.Target {
             override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
                 try {
-                    val wallpaperManager = WallpaperManager.getInstance(requireContext())
+                    val wallpaperManager=WallpaperManager.getInstance(requireContext())
                     wallpaperManager.setBitmap(bitmap)
                     Toast.makeText(requireContext(), "Wallpaper Set Successfully", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
@@ -162,24 +162,23 @@ class MainFragment : Fragment() {
             }
 
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                // Optional: you can display a loading placeholder here if needed
             }
         }
 
-        // Load the image with Picasso and pass the target
+        //loading the image
         Picasso.get().load(imageUrl).into(target)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding=null
     }
 
 
     fun isInternetAvailable(): Boolean {
-        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork != null && activeNetwork.isConnected
+        val connectivityManager=requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork=connectivityManager.activeNetworkInfo
+        return activeNetwork!=null && activeNetwork.isConnected
     }
 
 }

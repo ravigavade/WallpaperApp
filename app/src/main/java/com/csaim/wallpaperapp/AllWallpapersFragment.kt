@@ -37,8 +37,8 @@ class AllWallpapersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val wallpaperManager = WallpaperManager()
-        var wallpapers = listOf<WallpaperData>()
+        val wallpaperManager=WallpaperManager()
+        var wallpapers=listOf<WallpaperData>()
 
         val apiKey=getString(com.csaim.wallpaperapp.R.string.apiKey)
 
@@ -61,12 +61,12 @@ class AllWallpapersFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding=null
     }
 
 
     fun setWallpaper(imageUrl: String) {
-        val target = object : com.squareup.picasso.Target {
+        val target=object : com.squareup.picasso.Target {
             override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
                 try {
                     val wallpaperManager = android.app.WallpaperManager.getInstance(requireContext())
@@ -86,16 +86,13 @@ class AllWallpapersFragment : Fragment() {
                 // Optional: you can display a loading placeholder here if needed
             }
         }
-
         // Load the image with Picasso and pass the target
         Picasso.get().load(imageUrl).into(target)
     }
-
-
     fun isInternetAvailable(): Boolean {
-        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork != null && activeNetwork.isConnected
+        val connectivityManager=requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork=connectivityManager.activeNetworkInfo
+        return activeNetwork!=null && activeNetwork.isConnected
     }
 
 }

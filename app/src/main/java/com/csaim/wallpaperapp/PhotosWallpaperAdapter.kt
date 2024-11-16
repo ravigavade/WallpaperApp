@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 class PhotosWallpaperAdapter(
     private val context: Context,
     val wallpapers:List<WallpaperData>,
-    private val onWallpaperClick: (String) -> Unit // callback for wallpaper click
+    private val onWallpaperClick: (String)->Unit
     ):RecyclerView.Adapter<PhotosWallpaperAdapter.ViewHolder>() {
 
     class ViewHolder(rootLayout: View): RecyclerView.ViewHolder(rootLayout){
@@ -49,8 +49,8 @@ class PhotosWallpaperAdapter(
 
 
         holder.icon.setOnClickListener {
-            val intent = Intent(context, PreviewScreen::class.java).apply {
-                putExtra("WALLPAPER_URL", currentWallpapers.path) // Pass the wallpaper URL to PreviewScreen
+            val intent=Intent(context, PreviewScreen::class.java).apply {
+                putExtra("WALLPAPER_URL", currentWallpapers.path)
             }
             context.startActivity(intent)
         }

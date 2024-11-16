@@ -49,7 +49,7 @@ class wallpaperAdapter(
 
         holder.icon.setOnClickListener {
             val intent = Intent(context, PreviewScreen::class.java).apply {
-                putExtra("WALLPAPER_URL", currentWallpapers.path) // Pass the wallpaper URL to PreviewScreen
+                putExtra("WALLPAPER_URL", currentWallpapers.path) //pass the wallpaper URL to PreviewScreen
             }
             context.startActivity(intent)
         }
