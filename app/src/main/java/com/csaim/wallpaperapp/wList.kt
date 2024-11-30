@@ -51,6 +51,7 @@ class wList : AppCompatActivity() {
                     }
                     Log.d("Wallpaper", "Fetched ${wallpapers.size} wallpapers")
                 }
+                //
 
                 // Set up RecyclerView with GridLayoutManager and adapter
                 binding.recyclerView.layoutManager = GridLayoutManager(this@wList, 3)
