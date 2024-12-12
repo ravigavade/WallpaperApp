@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_main -> MainFragment()
                     R.id.nav_search -> SearchFragment()
                     R.id.nav_account -> AllWallpapersFragment()
+                    R.id.nav_live->LiveFragment()
                     else -> null
                 }
                 selectedFragment?.let {

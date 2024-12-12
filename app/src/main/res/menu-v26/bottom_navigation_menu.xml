@@ -22,4 +22,12 @@
         android:title="Collection"
 
         />
+    <item
+        android:id="@+id/nav_live"
+        android:icon="@drawable/photohub3"
+        android:fontFamily="@font/poppins"
+        android:iconTint="@color/white"
+        android:title="Live"
+
+        />
 </menu>
