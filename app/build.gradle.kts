@@ -70,5 +70,9 @@ dependencies {
         implementation ("androidx.fragment:fragment-ktx:1.5.5")  // or latest version
         implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")  // or latest version
 
+        implementation ("com.google.android.material:material:1.9.0'")
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+
+
 
 }
