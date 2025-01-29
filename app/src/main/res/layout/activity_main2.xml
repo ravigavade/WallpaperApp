@@ -21,7 +21,7 @@
 
         <EditText
             android:id="@+id/keyword"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
             android:layout_weight="1"
@@ -33,16 +33,14 @@
             android:padding="@dimen/_8sdp"
             android:textColor="@color/white" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/findBtn"-->
-<!--            android:layout_marginRight="@dimen/_8sdp"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="@color/bg"-->
-<!--            android:src="@drawable/baseline_arrow_forward_ios_24"-->
-<!--            app:tint="#E6E6FA" />-->
+        <ImageView
+            android:id="@+id/findBtn"
+            android:layout_width="49dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:src="@drawable/menu1"
+            app:tint="@color/white" />
     </LinearLayout>
 
 
