@@ -1,29 +1,28 @@
 package com.csaim.wallpaperapp
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.os.Bundle
-import android.widget.Toast
-import android.app.WallpaperManager
-import android.content.Context
 import android.net.ConnectivityManager
+import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.csaim.wallpaperapp.databinding.ActivityWlistBinding
+import com.csaim.wallpaperapp.databinding.ActivityCategoryManagerBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class wList : AppCompatActivity() {
-    private lateinit var binding:ActivityWlistBinding
+class CategoryViewer : AppCompatActivity() {
+    private lateinit var binding:ActivityCategoryManagerBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityWlistBinding.inflate(layoutInflater)
+        binding=ActivityCategoryManagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val wallpaperManager = WallpaperManager()
@@ -40,9 +39,19 @@ class wList : AppCompatActivity() {
             lifecycleScope.launch {
                 // Fetch wallpapers based on the value of q
                 withContext(Dispatchers.IO) {
-                    if (q == "illustration" || q == "photo") {
+                    if (q == "nature") {
                         // Fetch wallpapers for the category (illustration/photo)
-                        wallpapers = wallpaperManager.retrieveCategoryWallpaper(q, apiKey)
+                        wallpapers = wallpaperManager.retrieveCategory(q, apiKey)
+                    }else if (q=="background"){
+                        wallpapers = wallpaperManager.retrieveCategory(q, apiKey)
+                    }else if (q=="animals"){
+                        wallpapers = wallpaperManager.retrieveCategory(q, apiKey)
+                    }else if (q=="travel"){
+                        wallpapers = wallpaperManager.retrieveCategory(q, apiKey)
+                    }else if (q=="buildings"){
+                        wallpapers = wallpaperManager.retrieveCategory(q, apiKey)
+                    }else if (q=="computer"){
+                        wallpapers = wallpaperManager.retrieveCategory(q, apiKey)
                     } else {
                         // Fetch wallpapers based on color or other categories (using the value from q)
                         wallpapers = wallpaperManager.retrieveCarsWallpaper(q, apiKey)
@@ -51,7 +60,7 @@ class wList : AppCompatActivity() {
                 }
 
                 // Set up RecyclerView with GridLayoutManager and adapter
-                binding.recyclerView.layoutManager = GridLayoutManager(this@wList, 3)
+                binding.recyclerView.layoutManager = GridLayoutManager(this@CategoryViewer, 3)
                 binding.recyclerView.adapter =
                     wallpaperAdapter(this, wallpapers) { imageUrl ->
                         setWallpaper(imageUrl)
@@ -60,6 +69,19 @@ class wList : AppCompatActivity() {
         }else{
             Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     //function that sets the image as wallpaper
@@ -67,17 +89,17 @@ class wList : AppCompatActivity() {
         val target = object : com.squareup.picasso.Target {
             override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
                 try {
-                    val wallpaperManager = WallpaperManager.getInstance(this@wList)
+                    val wallpaperManager = android.app.WallpaperManager.getInstance(this@CategoryViewer)
                     wallpaperManager.setBitmap(bitmap)
-                    Toast.makeText(this@wList, "Wallpaper Set Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CategoryViewer, "Wallpaper Set Successfully", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(this@wList, "Failed to set wallpaper", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CategoryViewer, "Failed to set wallpaper", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                Toast.makeText(this@wList, "Failed to load image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CategoryViewer, "Failed to load image", Toast.LENGTH_SHORT).show()
             }
 
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -94,6 +116,7 @@ class wList : AppCompatActivity() {
         val activeNetwork = connectivityManager.activeNetworkInfo
         return activeNetwork != null && activeNetwork.isConnected
     }
+
 
 
 

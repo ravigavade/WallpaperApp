@@ -42,20 +42,6 @@ class SearchFragment : Fragment() {
         val apiKey=getString(com.csaim.wallpaperapp.R.string.apiKey)
         var q="nature"
 
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                wallpapers = wallpaperManager.retrieveLimitedWallpaper(apiKey)
-                Log.d("fucal", "calling")
-                if(wallpapers.isEmpty()){
-                    Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
-                }
-            }
-            binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
-            binding.recyclerView.adapter = wallpaperAdapter(requireContext(), wallpapers) { imageUrl ->
-                setWallpaper(imageUrl)
-            }
-        }
-
         binding.findBtn.setOnClickListener{
 
             q=binding.keyword.getText().toString().trim()
@@ -69,7 +55,7 @@ class SearchFragment : Fragment() {
 
                     binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
                     binding.recyclerView.adapter =
-                        wallpaperAdapter(requireContext(), wallpapers) { imageUrl ->
+                        wallpaperAdapter(this, wallpapers) { imageUrl ->
                             setWallpaper(imageUrl)
                         }
 

@@ -1,17 +1,16 @@
 package com.csaim.wallpaperapp
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
 
 class wallpaperAdapter(
-    private val context: Context,
+    private val context: CoroutineScope,
     val wallpapers:List<WallpaperData>,
     private val onWallpaperClick: (String) -> Unit // callback for wallpaper click
     ):RecyclerView.Adapter<wallpaperAdapter.ViewHolder>() {
@@ -47,12 +46,12 @@ class wallpaperAdapter(
                 .into(holder.icon)
         }
 
-        holder.icon.setOnClickListener {
-            val intent = Intent(context, PreviewScreen::class.java).apply {
-                putExtra("WALLPAPER_URL", currentWallpapers.path) //pass the wallpaper URL to PreviewScreen
-            }
-            context.startActivity(intent)
-        }
+//        holder.icon.setOnClickListener {
+//            val intent = Intent(context, PreviewScreen::class.java).apply {
+//                putExtra("WALLPAPER_URL", currentWallpapers.path) //pass the wallpaper URL to PreviewScreen
+//            }
+//            context.startActivity(intent)
+//        }
 
     }
 }

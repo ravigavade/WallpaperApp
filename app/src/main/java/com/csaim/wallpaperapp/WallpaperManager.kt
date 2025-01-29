@@ -201,6 +201,49 @@ class WallpaperManager {
         }
     }
 
+    suspend fun retrieveCategory(category: String, apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
+        val request = Request.Builder()
+            .url("https://pixabay.com/api/?category=$category&orientation=vertical&key=$apikey&safesearch=true&per_page=200&image_type=photo,illustration")
+//            .header("authorization","Bearer $apikey")
+            .get()
+            .build()
+
+        val response: Response = okHttpClient.newCall(request).execute()
+        val responseBody = response.body?.string()
+        Log.d("responseBody","$responseBody")
+
+        if (response.isSuccessful && !responseBody.isNullOrEmpty()) {
+            val wallpaperList = mutableListOf<WallpaperData>()
+
+            val json = JSONObject(responseBody)
+            val wallpapers = json.getJSONArray("hits")
+
+            for (i in 0 until wallpapers.length()) {
+//                val currentWallpaper = wallpapers.getJSONObject(i)
+//                val category = currentWallpaper.optString("category", "Unknown")
+//                val views = currentWallpaper.optString("views", "0")
+//                val path = currentWallpaper.optString("path", "")
+
+                val currentWallpaper=wallpapers.getJSONObject(i)
+                val path=currentWallpaper.getString("largeImageURL")
+
+                if (path.isNotEmpty()) {
+                    val walp = WallpaperData(
+//                        category = category,
+//                        views = views,
+                        path = path,
+                    )
+
+                    wallpaperList.add(walp)
+                }
+            }
+            wallpaperList.shuffle()
+            wallpaperList
+        } else {
+            emptyList()
+        }
+    }
+
 
 
 
