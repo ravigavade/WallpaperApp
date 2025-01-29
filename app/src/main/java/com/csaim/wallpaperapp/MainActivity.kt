@@ -9,7 +9,10 @@ import android.os.Environment
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -29,9 +32,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+
+
         private lateinit var binding:ActivityMain2Binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+
+
+        hideKeyboard()
+
 
 
 
@@ -142,21 +153,24 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.keyword.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH || event?.keyCode == KeyEvent.KEYCODE_ENTER) {
-                // Get the text from the EditText
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                actionId == EditorInfo.IME_ACTION_SEARCH ||
+                (event != null && event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)) {
+
                 val q = binding.keyword.text.toString().trim()
-                val intent=Intent(this, CategoryViewer::class.java)
-                intent.putExtra("Extra",q)  // Pass data to the next activity
-                startActivity(intent)
-                // Hide the keyboard after searching
-//                hideKeyboard()
-                true  // Return true to indicate the event is handled
-            } else {
-                false  // Let the system handle other actions
+                if (q.isNotEmpty()) {
+                    val intent = Intent(this@MainActivity, CategoryViewer::class.java)
+                    intent.putExtra("Extra", q)
+                    startActivity(intent)
+                    binding.keyword.setText("") // Clears the EditText
+
+                } else {
+                    Toast.makeText(this, "Please enter a keyword", Toast.LENGTH_SHORT).show()
+                }
+                return@setOnEditorActionListener true // Event is handled
             }
+            false // Let system handle other actions
         }
-
-
 
 
 
@@ -244,4 +258,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         */
+        fun hideKeyboard() {
+            val view = this.currentFocus
+            if (view != null) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
 }

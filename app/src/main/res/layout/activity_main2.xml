@@ -58,6 +58,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -65,7 +66,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_130sdp"
+                    android:layout_height="match_parent"
                     app:cardMaxElevation="@dimen/_12sdp"
                     app:cardElevation="@dimen/_5sdp"
                     app:cardCornerRadius="@dimen/_10sdp">
@@ -322,8 +323,10 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
