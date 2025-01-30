@@ -46,7 +46,7 @@ class PreviewScreen : AppCompatActivity() {
 
         binding.downloadBtn.setOnClickListener {
             link?.let { imageUrl ->
-                val fileName="wallpaper_${System.currentTimeMillis()}" // generate a unique file name
+                val fileName="Pixlr_${System.currentTimeMillis()}" // generate a unique file name
                 downloadImage(this,imageUrl,fileName) // call the download function
                 Toast.makeText(this,"Downloaded Successful ", Toast.LENGTH_SHORT).show()
             } ?: run {

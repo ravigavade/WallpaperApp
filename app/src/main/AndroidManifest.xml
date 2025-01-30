@@ -17,6 +17,9 @@
         android:theme="@style/Theme.WallpaperApp"
         tools:targetApi="31">
         <activity
+            android:name=".Unsplash"
+            android:exported="false" />
+        <activity
             android:name=".CategoryViewer"
             android:exported="false" />
         <activity

@@ -42,7 +42,7 @@ class wList : AppCompatActivity() {
                 withContext(Dispatchers.IO) {
                     if (q == "illustration" || q == "photo") {
                         // Fetch wallpapers for the category (illustration/photo)
-                        wallpapers = wallpaperManager.retrieveCategoryWallpaper(q, apiKey)
+                        wallpapers = wallpaperManager.retrieveCarsWallpaper(q, apiKey)
                     } else {
                         // Fetch wallpapers based on color or other categories (using the value from q)
                         wallpapers = wallpaperManager.retrieveCarsWallpaper(q, apiKey)

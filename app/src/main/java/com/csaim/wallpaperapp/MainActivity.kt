@@ -1,11 +1,16 @@
 package com.csaim.wallpaperapp
 
+import android.app.AlertDialog
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
@@ -30,6 +35,14 @@ import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONObject
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,14 +56,23 @@ class MainActivity : AppCompatActivity() {
 
         hideKeyboard()
 
-
-
-
+        // Delay the rating prompt by 30 seconds (30000 ms)
+        Handler(mainLooper).postDelayed({
+            showRatingDialog()
+        }, 30000) // 30 seconds delay
 
 
         binding=ActivityMain2Binding.inflate(layoutInflater)
         // Set a different XML layout file
         setContentView(binding.root)
+
+        binding.unsplash.setOnClickListener {
+            Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.drawer.setOnClickListener {
+            Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show()
+        }
 
         //all colors btn
         binding.red.setOnClickListener {
@@ -85,10 +107,7 @@ class MainActivity : AppCompatActivity() {
             val color="lilac"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
         }
-        binding.transparent.setOnClickListener {
-            val color="transparent"
-            startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
-        }
+
         binding.grayScale.setOnClickListener {
             val color="grayScale"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
@@ -152,6 +171,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         binding.keyword.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE ||
                 actionId == EditorInfo.IME_ACTION_SEARCH ||
@@ -178,19 +198,22 @@ class MainActivity : AppCompatActivity() {
 
 
         // URL to fetch the random image
-        val imageUrl = "https://picsum.photos/1920/1080"
+        val imageUrl = "https://picsum.photos/1080/1920"
 
         // Use Picasso to load and display the image
-        Picasso.get()
-            .load(imageUrl)  // The image URL
-            .into(binding.randomImg)  // ImageView to display the image
+                Picasso.get()
+                    .load(imageUrl)
+                    .into(binding.randomImg)
 
-        // Set click listener for downloading the image
-//        binding.randomImg.setOnClickListener {
-//            val fileName = "wallpaper_${System.currentTimeMillis()}" // Unique file name
-//            downloadImage(this, imageUrl, fileName) // Call the download function
-//            Toast.makeText(this, "Download Started", Toast.LENGTH_SHORT).show()
-//        }
+        binding.imgholder.visibility = View.VISIBLE
+
+//         Set click listener for downloading the image
+                binding.randomImg.setOnClickListener {
+                    Toast.makeText(this, "Downloading random pic\uD83E\uDD2A", Toast.LENGTH_SHORT).show()
+                    val fileName = "Pixlr_${System.currentTimeMillis()}.jpg" // Unique file name
+                    downloadImage(this, imageUrl, fileName)
+        }
+
     }
 
     // Function to download image
@@ -210,6 +233,35 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             // Handle errors if any (e.g., permission issues)
             Toast.makeText(context, "Download failed: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun showRatingDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Enjoying the App?")
+        builder.setMessage("If you like the app, please consider rating it! It helps us a lot.")
+
+        builder.setPositiveButton("Yes") { _, _ ->
+            openPlayStore() // Redirect to Play Store if user clicks "Yes"
+        }
+
+        builder.setNegativeButton("Maybe Later") { dialog, _ ->
+            dialog.dismiss() // Dismiss the dialog if user clicks "Maybe Later"
+        }
+
+        builder.show() // Show the dialog
+    }
+
+    private fun openPlayStore() {
+        val appPackageName = packageName // Get your app's package name
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName"))
+            startActivity(intent)
+        } catch (e: Exception) {
+            // If Play Store app is not available, open in browser
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName"))
+            startActivity(intent)
         }
     }
 
@@ -265,4 +317,6 @@ class MainActivity : AppCompatActivity() {
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
         }
+
+
 }

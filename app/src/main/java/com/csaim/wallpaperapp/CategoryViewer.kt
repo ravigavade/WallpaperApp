@@ -59,12 +59,12 @@ class CategoryViewer : AppCompatActivity() {
                     Log.d("Wallpaper", "Fetched ${wallpapers.size} wallpapers")
                 }
 
-                // Set up RecyclerView with GridLayoutManager and adapter
                 binding.recyclerView.layoutManager = GridLayoutManager(this@CategoryViewer, 3)
                 binding.recyclerView.adapter =
                     wallpaperAdapter(this, wallpapers) { imageUrl ->
                         setWallpaper(imageUrl)
                     }
+
             }
         }else{
             Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()

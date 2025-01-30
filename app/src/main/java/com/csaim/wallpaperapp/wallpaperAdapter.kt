@@ -17,8 +17,7 @@ class wallpaperAdapter(
 
     class ViewHolder(rootLayout: View): RecyclerView.ViewHolder(rootLayout){
         val icon: ImageView =rootLayout.findViewById(R.id.icon)
-//        val category:TextView=rootLayout.findViewById(R.id.category)
-//        val views:TextView=rootLayout.findViewById(R.id.views)
+
 
     }
 
@@ -37,10 +36,7 @@ class wallpaperAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentWallpapers=wallpapers[position]
 
-//        er
-
         if(currentWallpapers.path.isNotEmpty()){
-//            Picasso.get().setIndicatorsEnabled(true)
             Picasso.get()
                 .load(currentWallpapers.path)
                 .into(holder.icon)

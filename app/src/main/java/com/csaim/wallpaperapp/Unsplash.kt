@@ -17,91 +17,76 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AllWallpapersActivity : AppCompatActivity() {
-
+class Unsplash : AppCompatActivity() {
     private lateinit var binding: ActivityUnsplashBinding
-//    private lateinit var wallpapers: List<Wallpaper> // Declare wallpapers at the class level
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUnsplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        var wallpapers = listOf<WallpaperData>()
-
-        val apiKey=getString(com.csaim.wallpaperapp.R.string.apiKey)
-
-
-        val wallpaperManager = WallpaperManager() // Assuming WallpaperManager is your data manager class
+        val wallpaperManager = WallpaperManager()  // Assuming WallpaperManager is your data manager class
         window.statusBarColor = ContextCompat.getColor(this, R.color.black)
-
-
 
         if (isInternetAvailable()) {
             lifecycleScope.launch {
                 try {
-                    // Fetch wallpapers in the background thread
-                    withContext(Dispatchers.IO) {
-                        wallpapers = wallpaperManager.retrieveAllWallpaper(apiKey) // Assuming apiKey is defined
-                        Log.d("fucal", "calling")
+                    val wallpapers = withContext(Dispatchers.IO) {
+                        wallpaperManager.Unsplash()// Ensure this method exists and returns a list of wallpapers
                     }
 
-                    // Switch to the main thread to update UI
-                    withContext(Dispatchers.Main) {
-                        if (wallpapers.isNotEmpty()) {
-                            binding.recyclerView.layoutManager = GridLayoutManager(this@AllWallpapersActivity, 3)
-                            binding.recyclerView.adapter =
-                                wallpaperAdapter(this, wallpapers) { imageUrl ->
-                                    setWallpaper(imageUrl)
-                                }
-                        } else {
-                            Toast.makeText(this@AllWallpapersActivity, "No wallpapers found", Toast.LENGTH_SHORT).show()
-                        }
+                    Log.d("Unsplash", "Fetched ${wallpapers.size} wallpapers")
 
+                    if (wallpapers.isNotEmpty()) {
+                        binding.recyclerView.layoutManager = GridLayoutManager(this@Unsplash, 3)
+                        binding.recyclerView.adapter =
+                            wallpaperAdapter(this, wallpapers) { imageUrl ->
+                                setWallpaper(imageUrl)
+                            }
+                    } else {
+                        Toast.makeText(this@Unsplash, "No wallpapers found", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Log.e("Unsplash", "Error fetching wallpapers", e)
-                    Toast.makeText(this@AllWallpapersActivity, "Failed to load wallpapers", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Unsplash, "Failed to load wallpapers", Toast.LENGTH_SHORT).show()
                 }
             }
-
         } else {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
         }
     }
 
     // Function to set wallpaper
-    private fun setWallpaper(imageUrl: String) {
+    fun setWallpaper(imageUrl: String) {
         val target = object : com.squareup.picasso.Target {
             override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
                 try {
-                    val wallpaperManager = android.app.WallpaperManager.getInstance(this@AllWallpapersActivity)
+                    val wallpaperManager = android.app.WallpaperManager.getInstance(this@Unsplash)
                     wallpaperManager.setBitmap(bitmap)
-                    Toast.makeText(this@AllWallpapersActivity, "Wallpaper Set Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Unsplash, "Wallpaper Set Successfully", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(this@AllWallpapersActivity, "Failed to set wallpaper", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Unsplash, "Failed to set wallpaper", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                Toast.makeText(this@AllWallpapersActivity, "Failed to load image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@Unsplash, "Failed to load image", Toast.LENGTH_SHORT).show()
             }
 
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
                 // Optional: you can display a loading placeholder here if needed
             }
         }
-
-        // load the image with Picasso and pass the target
+        // Load the image with Picasso and pass the target
         Picasso.get().load(imageUrl).into(target)
     }
 
-    // Check for internet connectivity
+    // Check for internet connectivity (Updated method for newer APIs)
     fun isInternetAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork != null && activeNetwork.isConnected
+        val activeNetwork = connectivityManager.activeNetwork
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
+        return networkCapabilities != null && networkCapabilities.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }
