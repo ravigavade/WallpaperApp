@@ -155,9 +155,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_marginVertical="@dimen/_10sdp"
@@ -199,7 +200,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_60sdp"
                     android:backgroundTint="@color/red"
-                    android:layout_weight="1"
+                    android:layout_weight="12"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     app:cardCornerRadius="@dimen/_8sdp">
                     <LinearLayout
@@ -263,7 +264,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_60sdp"
-                    android:layout_weight="1"
+                    android:layout_weight="12"
                     android:id="@+id/travel"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:backgroundTint="@color/red"
@@ -349,7 +350,7 @@
             <LinearLayout
 
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:orientation="horizontal">
 
@@ -361,7 +362,7 @@
                     android:id="@+id/allIllustration"
 
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@color/white"
                     android:layout_marginBottom="@dimen/_2sdp"
                     >
@@ -374,7 +375,7 @@
                             android:src="@drawable/ill"
                             android:scaleType="centerCrop"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_170sdp"/>
+                            android:layout_height="match_parent"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -394,7 +395,7 @@
                     android:layout_weight="1"
                     android:id="@+id/allPhotos"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@color/white"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_10sdp"
