@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -78,40 +79,66 @@ class MainActivity : AppCompatActivity() {
         binding.red.setOnClickListener {
             val color="red"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
+
         binding.blue.setOnClickListener {
             val color="blue"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
         binding.green.setOnClickListener {
             val color="green"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
         binding.yellow.setOnClickListener {
             val color="yellow"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
         binding.brown.setOnClickListener {
             val color="brown"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
         binding.black.setOnClickListener {
             val color="black"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
         binding.turquoise.setOnClickListener {
             val color="turquoise"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
         binding.lilac.setOnClickListener {
             val color="lilac"
             startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
+        }
+        binding.white.setOnClickListener {
+            val color="white"
+            startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
+        }
+        binding.pink.setOnClickListener {
+            val color="pink"
+            startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         }
 
-        binding.grayScale.setOnClickListener {
-            val color="grayScale"
-            startActivity(Intent(this,wList::class.java).putExtra("Extra",color))
-        }
+
 
         //wlist intent for the illustration
         binding.allIllustration.setOnClickListener {
@@ -119,17 +146,22 @@ class MainActivity : AppCompatActivity() {
             val intent=Intent(this, wList::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(R.transition.slide_up, R.transition.slide_down)
         }
         binding.allPhotos.setOnClickListener {
             val q="photo"
             val intent=Intent(this, wList::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(R.transition.slide_up, R.transition.slide_down)
+
         }
 
         binding.collection.setOnClickListener {
             val intent=Intent(this, AllWallpapersActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.transition.slide_up,android.R.anim.fade_out)
+
         }
 
         binding.backgrounds.setOnClickListener {
@@ -137,36 +169,42 @@ class MainActivity : AppCompatActivity() {
             val intent=Intent(this, CategoryViewer::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         binding.nature.setOnClickListener {
             val q="nature"
             val intent=Intent(this, CategoryViewer::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         binding.animals.setOnClickListener {
             val q="animals"
             val intent=Intent(this, CategoryViewer::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         binding.travel.setOnClickListener {
             val q="travel"
             val intent=Intent(this, CategoryViewer::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         binding.buildings.setOnClickListener {
             val q="buildings"
             val intent=Intent(this, CategoryViewer::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         binding.computer.setOnClickListener {
             val q="computer"
             val intent=Intent(this, CategoryViewer::class.java)
             intent.putExtra("Extra",q)  // Pass data to the next activity
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
 
@@ -182,6 +220,8 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this@MainActivity, CategoryViewer::class.java)
                     intent.putExtra("Extra", q)
                     startActivity(intent)
+                    overridePendingTransition(R.transition.zoom_in,android.R.anim.slide_out_right)
+
                     binding.keyword.setText("") // Clears the EditText
 
                 } else {

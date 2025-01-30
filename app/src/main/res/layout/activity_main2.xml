@@ -410,7 +410,7 @@
                             android:src="@drawable/ph"
                             android:scaleType="centerCrop"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_170sdp"/>
+                            android:layout_height="match_parent"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -440,6 +440,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
+                <ScrollView
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -447,12 +452,12 @@
                                 android:orientation="vertical">
 
                                 <androidx.cardview.widget.CardView
-                                    android:id="@+id/grayScale"
+                                    android:id="@+id/white"
                                     android:layout_width="@dimen/_40sdp"
                                     android:layout_height="@dimen/_40sdp"
                                     android:layout_marginVertical="@dimen/_5sdp"
 
-                                    android:backgroundTint="#D3D3D3"
+                                    android:backgroundTint="@color/white"
                                     app:cardCornerRadius="8dp" />
 
                                 <androidx.cardview.widget.CardView
@@ -462,6 +467,14 @@
 
                                     android:layout_height="@dimen/_40sdp"
                                     android:backgroundTint="#C8A2C8"
+                                    app:cardCornerRadius="8dp" />
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/pink"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_marginVertical="@dimen/_5sdp"
+
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:backgroundTint="#FF8DA1"
                                     app:cardCornerRadius="8dp" />
 
                                 <androidx.cardview.widget.CardView
@@ -533,6 +546,8 @@
                                 </LinearLayout>
 
                             </LinearLayout>
+                </ScrollView>
+
 
          </LinearLayout>
 

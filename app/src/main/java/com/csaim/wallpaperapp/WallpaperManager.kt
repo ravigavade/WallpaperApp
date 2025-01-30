@@ -76,55 +76,10 @@ class WallpaperManager {
         }
     }
 
-    // Suspending function to fetch image URL based on category
-    suspend fun fetchImage(imageView: ImageView, category: String) = withContext(Dispatchers.IO) {
-        val client = OkHttpClient()
-
-
-        // Construct the API URL based on the category
-        val apiUrl = "https://pixabay.com/api/?image_type=$category&orientation=vertical&key=46751512-a1aca46eb5c1ffc447ed8fcb6&per_page=1"
-
-        val request = Request.Builder()
-            .url(apiUrl)
-            .build()
-
-        try {
-            // Execute the request
-            val response: Response = client.newCall(request).execute()
-            val responseBody = response.body?.string()
-
-            if (response.isSuccessful && !responseBody.isNullOrEmpty()) {
-                val jsonResponse = JSONObject(responseBody)
-                val imageUrl = jsonResponse.getJSONArray("hits").getJSONObject(0).getString("largeImageURL")
-
-                // Load the image into the ImageView using Picasso
-                if (imageUrl.isNotEmpty()) {
-                    withContext(Dispatchers.Main) {
-                        Picasso.get().load(imageUrl).into(imageView)
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(imageView.context, "No image found for $category", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(imageView.context, "Error fetching $category image", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            withContext(Dispatchers.Main) {
-                Toast.makeText(imageView.context, "Failed to load $category image", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-
-    suspend fun retrieveLimitedWallpaper(apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
+    suspend fun retrieveIllWallpaper(q: String,apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
 //            .url("https://wallhaven.cc/api/v1/search?q=$q&resolutions=1920x1200&categories=111*")
-            .url("https://pixabay.com/api/?orientation=vertical&key=$apikey&safesearch=true&image_type=photo,illustration&page=2")
+            .url("https://pixabay.com/api/?orientation=vertical&key=$apikey&per_page=200&safesearch=true&image_type=$q&page=2")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()
@@ -164,6 +119,9 @@ class WallpaperManager {
             emptyList()
         }
     }
+
+    // Suspending function to fetch image URL based on category
+
 
 
     suspend fun retrieveAllWallpaper(apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
@@ -211,7 +169,7 @@ class WallpaperManager {
 
     suspend fun retrieveCategory(category: String, apikey:String): List<WallpaperData> = withContext(Dispatchers.IO) {
         val request = Request.Builder()
-            .url("https://pixabay.com/api/?category=$category&orientation=vertical&key=$apikey&safesearch=true&per_page=200&image_type=photo,illustration&page=2")
+            .url("https://pixabay.com/api/?category=$category&orientation=vertical&key=$apikey&safesearch=true&per_page=200&image_type=photo&page=2")
 //            .header("authorization","Bearer $apikey")
             .get()
             .build()

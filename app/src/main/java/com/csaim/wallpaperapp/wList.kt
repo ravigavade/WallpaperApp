@@ -8,6 +8,7 @@ import android.app.WallpaperManager
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -26,6 +27,13 @@ class wList : AppCompatActivity() {
         binding=ActivityWlistBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish() // Close activity
+                overridePendingTransition(R.transition.slide_up, R.transition.slide_down)
+            }
+        })
+
         val wallpaperManager = WallpaperManager()
         var wallpapers = listOf<WallpaperData>()
 
@@ -42,8 +50,11 @@ class wList : AppCompatActivity() {
                 withContext(Dispatchers.IO) {
                     if (q == "illustration" || q == "photo") {
                         // Fetch wallpapers for the category (illustration/photo)
-                        wallpapers = wallpaperManager.retrieveCarsWallpaper(q, apiKey)
-                    } else {
+//                    if (q=="illustration"){
+                        wallpapers = wallpaperManager.retrieveIllWallpaper(q, apiKey)
+
+                    }
+                    else {
                         // Fetch wallpapers based on color or other categories (using the value from q)
                         wallpapers = wallpaperManager.retrieveCarsWallpaper(q, apiKey)
                     }
@@ -94,6 +105,9 @@ class wList : AppCompatActivity() {
         val activeNetwork = connectivityManager.activeNetworkInfo
         return activeNetwork != null && activeNetwork.isConnected
     }
+
+
+
 
 
 

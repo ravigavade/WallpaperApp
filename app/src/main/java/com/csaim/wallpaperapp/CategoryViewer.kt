@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -24,6 +25,15 @@ class CategoryViewer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityCategoryManagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        //transitions on back
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish() // Close activity
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            }
+        })
 
         val wallpaperManager = WallpaperManager()
         var wallpapers = listOf<WallpaperData>()
@@ -115,6 +125,12 @@ class CategoryViewer : AppCompatActivity() {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connectivityManager.activeNetworkInfo
         return activeNetwork != null && activeNetwork.isConnected
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        overridePendingTransition(R.transition.stay, R.transition.slide_down)
+        super.onBackPressed()
     }
 
 
